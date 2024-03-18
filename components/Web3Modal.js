@@ -11,16 +11,28 @@ if (!projectId) {
   );
 }
 
-const polygon = {
+
+const avocado = {
+  chainId: 634,
+  name: "Avocado RPC",
+  currency: "USDC",
+  explorerUrl: "https://avoscan.co/",
+  rpcUrl: "https://rpc.avocado.instadapp.io/",
+};
+
+/*
+ You can add more chains here, for ex:
+ const polygon = {
   chainId: 137,
   name: "Polygon",
   currency: "Matic",
   explorerUrl: "https://polygonscan.com",
   rpcUrl: "https://polygon-rpc.com/",
 };
+*/
 
 // 2. Set chains (add more chains as needed)
-const chains = [polygon];
+const chains = [avocado];
 
 // 3. Create a metadata object
 const metadata = {
@@ -41,8 +53,8 @@ createWeb3Modal({
   chains,
   projectId,
   themeVariables: {
-    "--w3m-color-mix": "#098B4F",
-    "--w3m-color-mix-strength": 10,
+    "--w3m-color-mix": "#0D5A37",
+    "--w3m-color-mix-strength": 5,
   },
 });
 
