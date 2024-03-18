@@ -12,7 +12,9 @@ const Footer = () => {
       <div className="flex flex-col md:flex-row justify-between items-center justify-center">
         {/* First column */}
         <div className="mb-4 md:mb-0">
+        <a href="https://avocado.instadapp.io/" target='_blank' className="text-gray-600 hover:text-gray-900">
           <Image src={logo} alt="Logo" width={100} height={100} />
+          </a>
         </div>
         {/* Second column */}
         <div className="mb-4 md:mb-0">

@@ -205,6 +205,16 @@ export default function Home() {
           </div>
         </div>
       )}
+
+<div className="text-center max-w-2xl mx-auto mb-8 mt-16">
+  <p className="text-lg text-gray-700">
+    Welcome to the <b>Avocado Starter Dapp!</b> This dapp serves as a starting point for developers interested in integrating Avocado Wallet into their projects.
+  </p>
+  <p className="text-lg text-gray-700 mt-4">
+    With this starter dapp, you can quickly connect to Avocado Wallet and explore its features. Clone this <a href="https://github.com/Vanshika-Rana/avo-starter-dapp" target='_blank' className="font-bold text-emerald-500 underline"> repository</a> to kickstart your development journey.
+  </p>
+</div>
+
 </section>
 <Footer/>
     </main>
