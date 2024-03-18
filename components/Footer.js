@@ -37,7 +37,7 @@ const Footer = () => {
   <ul className="flex flex-col items-right">
     <li>
       <a href="https://twitter.com/avowallet" target='_blank' className="text-gray-600 hover:text-gray-900">
-        <FaXTwitter className="inline-block mr-2" /> X/Twitter
+        <FaXTwitter className="inline-block mr-2" /> Twitter / X
       </a>
     </li>
     <li>

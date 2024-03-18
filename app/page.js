@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { IoCopyOutline } from "react-icons/io5";
 import avoForwarderV1ABI from "../constants/avo-forwarder-v1-abi.json";
