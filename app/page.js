@@ -39,7 +39,7 @@ export default function Home() {
 	};
 
 	return (
-		<main className='flex flex-col items-center justify-between bg-red-100 min-h-screen w-full'>
+		<main className='flex flex-col items-center justify-between  min-h-screen w-full'>
 			<section className='flex flex-col h-[80vh] items-center justify-center px-4 sm:px-6 lg:px-8'>
 				<Image src={logolight} width={200} height={500} alt='' />
 				<span className='mt-2 mb-8 text-5xl font-bold text-center sm:text-7xl'>
