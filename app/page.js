@@ -9,6 +9,7 @@ import AddressCard from "../components/AddressCard";
 import BalanceCard from "../components/BalanceCard";
 import SendButton from "../utils/SendButton";
 import ReceiveButton from "../utils/ReceiveButton";
+import { IoCopyOutline } from "react-icons/io5";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -40,8 +41,8 @@ export default function Home() {
 	};
 
 	return (
-		<main className='flex flex-col items-center justify-between  min-h-screen w-full'>
-			<section className='flex flex-col h-[80vh] items-center justify-center px-4 sm:px-6 lg:px-8'>
+		<main className=' flex flex-col items-center justify-between min-h-screen w-full'>
+			<section className='flex flex-col min-h-screen items-center justify-center px-4 sm:px-6 lg:px-8'>
 				<Image src={logolight} width={200} height={500} alt='' />
 				<span className='mt-2 mb-8 text-5xl font-bold text-center sm:text-7xl'>
 					Starter Dapp
@@ -56,42 +57,90 @@ export default function Home() {
 					</button>
 				) : (
 					<>
-						<div className='grid w-full grid-cols-1 gap-4 mt-8 md:grid-cols-3'>
-							<AddressCard
-								title='Connected EOA Address'
-								address={connectedAddress}
-								onCopy={copyToClipboard}
-							/>
-							<AddressCard
-								title='Avocado Address'
-								address={avocadoAddress}
-								onCopy={copyToClipboard}
-							/>
-							<AddressCard
-								title='Avocado Multisig Address #1'
-								address={avocadoMultisigAddress}
-								onCopy={copyToClipboard}
-							/>
-							<BalanceCard
-								title='Avocado GAS Tank Balance'
-								balance={avocadoGasBalance}
-								unit='USDC'
-							/>
-							<BalanceCard
-								title='Polygon Matic Balance'
-								balance={polygonBalance}
-								unit='MATIC'
-							/>
-							<BalanceCard
-								title='Multisig #1 Gas Tank Balance'
-								balance={avocadoMultisigGasBalance}
-								unit='USDC'
-							/>
-						</div>
+						<div className='flex flex-col '>
+							{/* <div className='flex  w-full items-center justify-center '>
+								<h2 className=' font-bold text-xl'>
+									Connected EOA Address:{" "}
+								</h2>
+								<div className='flex items-center'>
+									<p className='mx-4 text-md'>
+										{connectedAddress.slice(0, 6) +
+											"..." +
+											connectedAddress.slice(-7)}
+									</p>
+									<button
+										onClick={() => copyToClipboard(address)}
+										className='px-4 py-1 text-green-600 rounded-full hover:text-green-700 hover:scale-95'>
+										<IoCopyOutline />
+									</button>
+								</div>
+							</div>
 
-						<div className='flex justify-around mt-4 w-full'>
-							<SendButton onClick={open} />
-							<ReceiveButton onClick={open} />
+							<div className='bg-purple-500 text-white rounded-lg py-2 mt-2 flex  w-full items-center justify-center '>
+								<h2 className=' font-bold text-xl'>
+									Polygon USDC Balance:{" "}
+								</h2>
+								<div className='flex items-center'>
+									<p className='mx-4 text-md'>
+										{polygonBalance} <span>USDC</span>
+									</p>
+								</div>
+							</div> */}
+							<div class='flex flex-col items-center justify-center'>
+								{/* <!-- Connected EOA Address --> */}
+								<div class=' text-black rounded-lg py-2 mt-2 w-full'>
+									<h2 class='font-bold text-xl text-center'>
+										Connected EOA Address:
+									</h2>
+									<div class='flex items-center justify-center'>
+										<p class='text-sm text-center'>
+											{connectedAddress}
+										</p>
+									</div>
+								</div>
+
+								{/* <!-- Polygon USDC Balance --> */}
+								<div class='bg-purple-200 text-black rounded-lg py-2 mt-2 w-full'>
+									<h2 class='font-bold text-lg text-center'>
+										Polygon USDC Balance:
+									</h2>
+									<div class='flex items-center justify-center'>
+										<p class='text-sm text-center'>
+											{polygonBalance} <span>USDC</span>
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<h3 className='text-emerald-800 font-bold text-xl mt-4 w-full text-center'>
+								WALLET INFORMATION
+							</h3>
+							<div className='grid w-full grid-cols-1 gap-4 mt-3 md:grid-cols-2'>
+								<AddressCard
+									title='Avocado Address'
+									address={avocadoAddress}
+									onCopy={copyToClipboard}
+								/>
+								<AddressCard
+									title='Avocado Multisig Address #1'
+									address={avocadoMultisigAddress}
+									onCopy={copyToClipboard}
+								/>
+								<BalanceCard
+									title='Avocado GAS Tank Balance'
+									balance={avocadoGasBalance}
+									unit='USDC'
+								/>
+								<BalanceCard
+									title='Multisig #1 Gas Tank Balance'
+									balance={avocadoMultisigGasBalance}
+									unit='USDC'
+								/>
+							</div>
+							<div className='grid w-full grid-cols-1 gap-4 mt-8 md:grid-cols-2'>
+								<SendButton onClick={open} />
+								<ReceiveButton onClick={open} />
+							</div>
 						</div>
 					</>
 				)}

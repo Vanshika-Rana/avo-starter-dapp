@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { MdOutlineArrowOutward, MdCallReceived } from "react-icons/md";
+import { MdOutlineArrowOutward } from "react-icons/md";
 import { useWeb3ModalProvider } from "@web3modal/ethers5/react";
 import { connectEOA } from "./web3";
 import { ethers } from "ethers";
@@ -235,7 +235,7 @@ const SendButton = () => {
 		<>
 			<button
 				onClick={openModal}
-				className='flex items-center justify-center gap-2 px-6 py-2 font-semibold text-white transition-transform duration-500 transform rounded-lg bg-emerald-500 hover:scale-95'>
+				className='flex items-center justify-center gap-2 px-6 py-2 font-semibold transition-transform duration-500 transform rounded-lg text-white bg-emerald-500 hover:scale-95'>
 				<MdOutlineArrowOutward />
 				<span>Send USDC on Polygon</span>
 			</button>

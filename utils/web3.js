@@ -73,7 +73,7 @@ const createAvoWallet = async (
 		);
 		setAvocadoGasBalance(avocadoGasTankBalance);
 
-		const polygonBalance = await fetchPolygonBalance(avocadoAddress);
+		const polygonBalance = await fetchPolygonUSDCBalance(avocadoAddress);
 		setPolygonBalance(polygonBalance);
 
 		const multisigGasTankBalance = await fetchAvocadoGasTankBalance(
@@ -98,15 +98,33 @@ const fetchAvocadoGasTankBalance = async (address) => {
 	}
 };
 
-const fetchPolygonBalance = async (address) => {
+const fetchPolygonUSDCBalance = async (address) => {
+	const usdcContractAddress = "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359";
 	try {
 		const polygonProvider = new ethers.providers.JsonRpcProvider(
 			chains.polygon.rpcUrl
 		);
-		const balance = await polygonProvider.getBalance(address);
-		return ethers.utils.formatEther(balance);
+		const usdcContract = new ethers.Contract(
+			usdcContractAddress,
+			["function balanceOf(address) view returns (uint256)"],
+			polygonProvider
+		);
+		const balance = await usdcContract.balanceOf(address);
+		return ethers.utils.formatUnits(balance, 6); // Assuming USDC has 6 decimals
 	} catch (err) {
-		console.error("Error fetching Polygon balance:", err);
+		console.error("Error fetching Polygon USDC balance:", err);
 		return "";
 	}
 };
+// const fetchPolygonBalance = async (address) => {
+// 	try {
+// 		const polygonProvider = new ethers.providers.JsonRpcProvider(
+// 			chains.polygon.rpcUrl
+// 		);
+// 		const balance = await polygonProvider.getBalance(address);
+// 		return ethers.utils.formatEther(balance);
+// 	} catch (err) {
+// 		console.error("Error fetching Polygon balance:", err);
+// 		return "";
+// 	}
+// };
