@@ -74,7 +74,7 @@ export default function Home() {
 								{/* <!-- Polygon USDC Balance --> */}
 								<div class='bg-purple-200 text-black rounded-lg py-2 mt-2 w-full'>
 									<h2 class='font-bold text-lg text-center'>
-										Polygon USDC Balance:
+										Polygon USDC Balance (on Avocado):
 									</h2>
 									<div class='flex items-center justify-center'>
 										<p class='text-sm text-center'>
