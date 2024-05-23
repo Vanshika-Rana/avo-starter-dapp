@@ -58,34 +58,6 @@ export default function Home() {
 				) : (
 					<>
 						<div className='flex flex-col '>
-							{/* <div className='flex  w-full items-center justify-center '>
-								<h2 className=' font-bold text-xl'>
-									Connected EOA Address:{" "}
-								</h2>
-								<div className='flex items-center'>
-									<p className='mx-4 text-md'>
-										{connectedAddress.slice(0, 6) +
-											"..." +
-											connectedAddress.slice(-7)}
-									</p>
-									<button
-										onClick={() => copyToClipboard(address)}
-										className='px-4 py-1 text-green-600 rounded-full hover:text-green-700 hover:scale-95'>
-										<IoCopyOutline />
-									</button>
-								</div>
-							</div>
-
-							<div className='bg-purple-500 text-white rounded-lg py-2 mt-2 flex  w-full items-center justify-center '>
-								<h2 className=' font-bold text-xl'>
-									Polygon USDC Balance:{" "}
-								</h2>
-								<div className='flex items-center'>
-									<p className='mx-4 text-md'>
-										{polygonBalance} <span>USDC</span>
-									</p>
-								</div>
-							</div> */}
 							<div class='flex flex-col items-center justify-center'>
 								{/* <!-- Connected EOA Address --> */}
 								<div class=' text-black rounded-lg py-2 mt-2 w-full'>

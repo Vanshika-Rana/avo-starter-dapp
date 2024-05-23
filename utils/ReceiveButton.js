@@ -34,7 +34,7 @@ const ReceiveButton = () => {
 							{
 								chainId: "0x89",
 								chainName: "Polygon Mainnet",
-								rpcUrls: ["https://polygon-rpc.com/"],
+								rpcUrls: ["https://polygon-rpc.com"],
 								nativeCurrency: {
 									name: "MATIC",
 									symbol: "MATIC",
