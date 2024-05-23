@@ -7,7 +7,8 @@ import logolight from "../public/images/logolight.png";
 import logo from "../public/images/logo.png";
 import AddressCard from "../components/AddressCard";
 import BalanceCard from "../components/BalanceCard";
-import { SendButton, ReceiveButton } from "../components/ActionButton";
+import SendButton from "../utils/SendButton";
+import ReceiveButton from "../utils/ReceiveButton";
 import Footer from "@/components/Footer";
 
 export default function Home() {

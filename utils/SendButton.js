@@ -2,21 +2,11 @@
 import { useState, useEffect } from "react";
 import { MdOutlineArrowOutward, MdCallReceived } from "react-icons/md";
 import { useWeb3ModalProvider } from "@web3modal/ethers5/react";
-import { connectEOA } from "../utils/web3";
+import { connectEOA } from "./web3";
 import { ethers } from "ethers";
 import avoForwarderV1ABI from "../constants/avo-forwarder-v1-abi.json";
 import avocadoV1ABI from "../constants/avocado-v1-abi.json";
-import Modal from "./Modal";
-
-const ActionButton = ({ icon, label, onClick }) => (
-	<button
-		onClick={onClick}
-		className='flex items-center justify-center gap-2 px-6 py-2 font-semibold text-white transition-transform duration-500 transform rounded-lg bg-emerald-500 hover:scale-95'>
-		{icon}
-		<span>{label}</span>
-	</button>
-);
-
+import Modal from "../components/Modal";
 const types = {
 	Cast: [
 		{ name: "params", type: "CastParams" },
@@ -44,7 +34,7 @@ const types = {
 		{ name: "value", type: "uint256" },
 	],
 };
-// Send Functionality
+
 const SendButton = () => {
 	const [connectedAddress, setConnectedAddress] = useState("");
 	const [receiverAddress, setReceiverAddress] = useState("");
@@ -57,6 +47,40 @@ const SendButton = () => {
 	useEffect(() => {
 		connectEOA(walletProvider, setConnectedAddress);
 	}, [walletProvider]);
+
+	const switchToAvocado = async () => {
+		try {
+			await walletProvider.request({
+				method: "wallet_switchEthereumChain",
+				params: [{ chainId: "0x27A" }], // Avocado chain ID
+			});
+		} catch (error) {
+			if (error.code === 4902) {
+				try {
+					await walletProvider.request({
+						method: "wallet_addEthereumChain",
+						params: [
+							{
+								chainId: "0x27A",
+								chainName: "Avocado RPC",
+								rpcUrls: ["https://rpc.avocado.instadapp.io/"],
+								nativeCurrency: {
+									name: "USDC",
+									symbol: "USDC",
+									decimals: 6,
+								},
+								blockExplorerUrls: ["https://avoscan.co/"],
+							},
+						],
+					});
+				} catch (addError) {
+					console.error("Failed to add Avocado RPC", addError);
+				}
+			} else {
+				console.error("Failed to switch to Avocado RPC", error);
+			}
+		}
+	};
 
 	const handleSend = async () => {
 		setLoading(true);
@@ -162,7 +186,7 @@ const SendButton = () => {
 			const domain = {
 				name: domainName,
 				version: domainVersion,
-				chainId: "634",
+				chainId: 634,
 				verifyingContract: avocadoAddress,
 				salt: ethers.utils.solidityKeccak256(["uint256"], [chainId]),
 			};
@@ -209,17 +233,23 @@ const SendButton = () => {
 
 	return (
 		<>
-			<ActionButton
-				icon={<MdOutlineArrowOutward />}
-				label='Send USDC on Polygon'
+			<button
 				onClick={openModal}
-			/>
+				className='flex items-center justify-center gap-2 px-6 py-2 font-semibold text-white transition-transform duration-500 transform rounded-lg bg-emerald-500 hover:scale-95'>
+				<MdOutlineArrowOutward />
+				<span>Send USDC on Polygon</span>
+			</button>
 			{showModal && (
 				<Modal onClose={closeModal}>
 					<div className='p-6'>
 						<h2 className='text-lg font-semibold mb-4'>
 							Send USDC
 						</h2>
+						<button
+							onClick={switchToAvocado}
+							className='w-full text-emerald-400 font-semibold transition-transform duration-500 transform hover:scale-95 focus:outline-none mb-4'>
+							Switch to Avocado
+						</button>
 						<div className='mb-4'>
 							<label
 								htmlFor='receiverAddress'
@@ -273,6 +303,12 @@ const SendButton = () => {
 								</p>
 							</div>
 						)}
+						<div className='mt-4'>
+							<p className='text-orange-600 font-semibold text-sm text-center'>
+								Make sure to switch the networks for the
+								transaction to execute successfully!
+							</p>
+						</div>
 					</div>
 				</Modal>
 			)}
@@ -280,8 +316,4 @@ const SendButton = () => {
 	);
 };
 
-const ReceiveButton = ({ onClick }) => (
-	<ActionButton icon={<MdCallReceived />} label='Receive' onClick={onClick} />
-);
-
-export { SendButton, ReceiveButton };
+export default SendButton;
